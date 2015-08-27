@@ -30,16 +30,14 @@ class ControllerBase
     check_for_existing_response
     self.res.status = 302
     self.res["location"] = url
-    session.store_session(@res)
-    flash.store_flash(@res)
+    store_flash_and_session
   end
 
   def render_content(content, content_type)
     check_for_existing_response
     self.res.body = content
     self.res.content_type = content_type
-    session.store_session(@res)
-    flash.store_flash(@res)
+    store_flash_and_session
   end
 
   def render(template_name)
@@ -55,6 +53,10 @@ class ControllerBase
     render(name) unless already_built_response?
   end
 
+  def authenticity_token
+    session[:authenticity_token] = SecureRandom.urlsafe_base64
+  end
+
   private
   def already_built_response?
     @already_built_response
@@ -63,5 +65,10 @@ class ControllerBase
   def check_for_existing_response
     raise "Response has already been made" if already_built_response?
     @already_built_response = true
+  end
+
+  def store_flash_and_session
+    session.store_session(@res)
+    flash.store_flash(@res)
   end
 end
