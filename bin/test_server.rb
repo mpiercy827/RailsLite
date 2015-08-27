@@ -1,5 +1,3 @@
-require 'webrick'
-require 'json'
 require_relative '../lib/controller_base'
 require_relative '../lib/router'
 
