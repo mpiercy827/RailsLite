@@ -1,3 +1,4 @@
+require "byebug"
 class Route
   attr_reader :pattern, :http_method, :controller_class, :action_name
 
@@ -20,7 +21,6 @@ class Route
     match_data = self.pattern.match(req.path)
     match_data.names.each { |key| route_params[key] = match_data[key] }
     controller = controller_class.new(req, res, route_params)
-
     if req.request_method == "GET"
       controller.invoke_action(action_name)
     else
@@ -29,8 +29,7 @@ class Route
       if authenticity_token && controller.session["authenticity_token"] == authenticity_token
        controller.invoke_action(action_name)
       else
-        puts "\n\n\n\n\n\n\n\n\n\n From Cookie: #{authenticity_token} \n\n\n\n\n\n\n From Controller: #{controller.session["authenticity_token"]} \n\n\n\n\n\n\n\n"
-       raise "Invalid Authenticity Token"
+        raise "Invalid Authenticity Token"
       end
     end
   end

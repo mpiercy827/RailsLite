@@ -52,8 +52,12 @@ class ControllerBase
     render(name) unless already_built_response?
   end
 
+  def form_authenticity_token
+    session["authenticity_token"] = SecureRandom.urlsafe_base64
+  end
+
   def authenticity_token
-    session["authenticity_token"] ||= SecureRandom.urlsafe_base64
+    session["authenticity_token"]
   end
 
   private
