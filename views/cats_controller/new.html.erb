@@ -2,21 +2,6 @@
   <%= flash[:errors] %>
 <% end %>
 
-No Authenticity Token
-<form action="/cats" method="POST">
-  <label>Name
-    <input type="text" name="cat[name]" value="<%= @cat.name %>">
-  </label>
-
-  <label>Owner
-    <input type="text" name="cat[owner]" value="<%= @cat.owner %>">
-  </label>
-
-  <input type="submit">
-</form>
-
-
-Authenticity Token
 <form action="/cats" method="POST">
   <input type="hidden"
     name="form_authenticity_token"

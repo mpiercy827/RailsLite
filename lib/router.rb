@@ -1,3 +1,4 @@
+require 'byebug'
 class Route
   attr_reader :pattern, :http_method, :controller_class, :action_name
 
@@ -19,9 +20,20 @@ class Route
 
     match_data = self.pattern.match(req.path)
     match_data.names.each { |key| route_params[key] = match_data[key] }
-
     controller = controller_class.new(req, res, route_params)
-    controller.invoke_action(action_name)
+
+    if req.request_method == "GET"
+      controller.invoke_action(action_name)
+    else
+      cookie = req.cookies.find { |cookie| cookie.name == "_rails_lite_app" }
+      authenticity_token = JSON.parse(cookie.value)["authenticity_token"]
+      byebug
+      if authenticity_token && controller.authenticity_token == authenticity_token
+       controller.invoke_action(action_name)
+      else
+       raise "Invalid Authenticity Token"
+      end
+    end
   end
 end
 

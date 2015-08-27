@@ -25,7 +25,6 @@ class ControllerBase
     @session ||= Session.new(@req)
   end
 
-
   def redirect_to(url)
     check_for_existing_response
     self.res.status = 302
@@ -54,7 +53,7 @@ class ControllerBase
   end
 
   def authenticity_token
-    session[:authenticity_token] = SecureRandom.urlsafe_base64
+    session[:authenticity_token] ||= SecureRandom.urlsafe_base64
   end
 
   private
