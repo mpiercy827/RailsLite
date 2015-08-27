@@ -53,7 +53,7 @@ class ControllerBase
   end
 
   def authenticity_token
-    session[:authenticity_token] ||= SecureRandom.urlsafe_base64
+    session["authenticity_token"] ||= SecureRandom.urlsafe_base64
   end
 
   private

@@ -1,4 +1,3 @@
-require 'byebug'
 class Route
   attr_reader :pattern, :http_method, :controller_class, :action_name
 
@@ -27,7 +26,6 @@ class Route
     else
       cookie = req.cookies.find { |cookie| cookie.name == "_rails_lite_app" }
       authenticity_token = JSON.parse(cookie.value)["authenticity_token"]
-      byebug
       if authenticity_token && controller.authenticity_token == authenticity_token
        controller.invoke_action(action_name)
       else

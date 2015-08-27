@@ -12,7 +12,7 @@ class Session
   end
 
   def [](key)
-    @cookie[key]
+    @cookie[key.to_s] || @cookie[key.to_sym]
   end
 
   def []=(key, val)
