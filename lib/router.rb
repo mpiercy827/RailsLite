@@ -26,9 +26,10 @@ class Route
     else
       cookie = req.cookies.find { |cookie| cookie.name == "_rails_lite_app" }
       authenticity_token = JSON.parse(cookie.value)["authenticity_token"]
-      if authenticity_token && controller.authenticity_token == authenticity_token
+      if authenticity_token && controller.session["authenticity_token"] == authenticity_token
        controller.invoke_action(action_name)
       else
+        puts "\n\n\n\n\n\n\n\n\n\n From Cookie: #{authenticity_token} \n\n\n\n\n\n\n From Controller: #{controller.session["authenticity_token"]} \n\n\n\n\n\n\n\n"
        raise "Invalid Authenticity Token"
       end
     end
