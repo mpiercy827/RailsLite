@@ -5,17 +5,12 @@ class Flash
     @now = {}
     @later = {}
     req.cookies.each do |cookie|
-      if cookie.name == "_rails_lite_app_flash"
-        @now = JSON.parse(cookie.value)
-      end
+      @now = JSON.parse(cookie.value) if cookie.name == "_rails_lite_app_flash"
     end
   end
 
   def [](key)
-    now[key.to_sym] ||
-    now[key.to_s] ||
-    @later[key.to_sym] ||
-    @later[key.to_s]
+    now[key.to_sym] || now[key.to_s] || @later[key.to_sym] || @later[key.to_s]
   end
 
   def []=(key, value)
@@ -23,7 +18,6 @@ class Flash
   end
 
   def store_flash(res)
-    cookie = WEBrick::Cookie.new("_rails_lite_app_flash", @later.to_json)
-    res.cookies << cookie
+    res.cookies << WEBrick::Cookie.new("_rails_lite_app_flash", @later.to_json)
   end
 end
