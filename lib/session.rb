@@ -21,6 +21,8 @@ class Session
 
   #Serialize cookie to json and add it to response
   def store_session(res)
-    res.cookies << WEBrick::Cookie.new("_rails_lite_app", @cookie.to_json)
+    cookie = WEBrick::Cookie.new("_rails_lite_app", @cookie.to_json)
+    cookie.path = "/"
+    res.cookies << cookie
   end
 end

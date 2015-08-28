@@ -18,6 +18,8 @@ class Flash
   end
 
   def store_flash(res)
-    res.cookies << WEBrick::Cookie.new("_rails_lite_app_flash", @later.to_json)
+    cookie = WEBrick::Cookie.new("_rails_lite_app_flash", @later.to_json)
+    cookie.path = "/"
+    res.cookies << cookie
   end
 end
