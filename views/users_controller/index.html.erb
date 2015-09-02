@@ -4,5 +4,7 @@
   <%= flash[:errors] %>
 <% end %>
 
-<pre><%= @users.to_s %></pre>
+<% @users.each do |user| %>
+  <%= user.inspect %><br>
+<% end %>
 <a href="/users/new">New user!</a>

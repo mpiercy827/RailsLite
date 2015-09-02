@@ -1,9 +1,9 @@
 require 'sqlite3'
 
 # https://tomafro.net/2010/01/tip-relative-paths-with-file-expand-path
-ROOT_FOLDER = File.join(File.dirname(__FILE__), '..')
-SQL_FILE = File.join(ROOT_FOLDER, 'users.sql')
-DB_FILE = File.join(ROOT_FOLDER, 'users.db')
+ROOT_FOLDER = File.join(File.dirname(__FILE__), '../..')
+SQL_FILE = File.join(ROOT_FOLDER, 'app.sql')
+DB_FILE = File.join(ROOT_FOLDER, 'app.db')
 
 class DBConnection
   def self.open(db_file_name)

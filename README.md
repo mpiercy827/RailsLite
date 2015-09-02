@@ -11,8 +11,9 @@ cookies and params functionality. See below for how to use RubyWeb in your proje
 * Users can store cookies in the session hash, which can be used for creating user authentication systems.
 * Gives users a flash to store and render messages for their app's users.
 * Prevents CSRF attacks on the user's app with the use of randomly generated authenticity tokens.
+* Provides a SQLite database and an object relational mapping for model manipulation and data storage.
 
 ## Future Goals
-* [ ] Implement an object relational mapping and give users a SQLite database for models.
+* [x] Implement an object relational mapping and give users a SQLite database for models.
 * [ ] Add url helpers, so users can refer to routes more generally.
 * [ ] Allow RubyWeb to handle put and delete requests.

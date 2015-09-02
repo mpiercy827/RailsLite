@@ -1,6 +1,6 @@
-require_relative '../lib/controller_base'
-require_relative '../lib/router'
-require_relative '../lib/sqlobject'
+require_relative '../lib/RubyWeb/controller_base'
+require_relative '../lib/RubyWeb/router'
+require_relative '../lib/SQLObject/sqlobject'
 
 class User < SQLObject
   attr_reader :id, :name, :email
