@@ -1,0 +1,8 @@
+<h1>All Users</h1>
+
+<% if flash[:errors] %>
+  <%= flash[:errors] %>
+<% end %>
+
+<pre><%= @users.to_s %></pre>
+<a href="/users/new">New user!</a>

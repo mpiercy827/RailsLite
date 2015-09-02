@@ -2,16 +2,16 @@
   <%= flash[:errors] %>
 <% end %>
 
-<form action="/cats" method="POST">
+<form action="/users" method="POST">
   <input type="hidden"
     name="form_authenticity_token"
     value="<%= form_authenticity_token %>">
   <label>Name
-    <input type="text" name="cat[name]" value="<%= @cat.name %>">
+    <input type="text" name="user[name]" value="<%= @user.name %>">
   </label>
 
-  <label>Owner
-    <input type="text" name="cat[owner]" value="<%= @cat.owner %>">
+  <label>Email
+    <input type="text" name="user[email]" value="<%= @user.email %>">
   </label>
 
   <input type="submit">

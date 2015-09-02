@@ -1,47 +1,47 @@
 require_relative '../lib/controller_base'
 require_relative '../lib/router'
 
-class Cat
-  attr_reader :name, :owner
+class User
+  attr_reader :name, :email
 
   def self.all
-    @cat ||= []
+    @user ||= []
   end
 
   def initialize(params = {})
     params ||= {}
-    @name, @owner = params["name"], params["owner"]
+    @name, @email = params["name"], params["email"]
   end
 
   def save
-    return false unless @name.present? && @owner.present?
+    return false unless @name.present? && @email.present?
 
-    Cat.all << self
+    User.all << self
     true
   end
 
   def inspect
-    { name: name, owner: owner }.inspect
+    { name: name, email: email }.inspect
   end
 end
 
 
-class CatsController < ControllerBase
+class UsersController < ControllerBase
   def index
-    @cats = Cat.all
+    @users = User.all
     render :index
   end
 
   def new
-    @cat = Cat.new
+    @user = User.new
     render :new
   end
 
   def create
-    @cat = Cat.new(params["cat"])
-    if @cat.save
+    @user = User.new(params["user"])
+    if @user.save
       flash[:errors] = "Good Job!"
-      redirect_to("/cats")
+      redirect_to("/users")
     else
       flash.now[:errors] = "Try again!"
       render :new
@@ -49,17 +49,17 @@ class CatsController < ControllerBase
   end
 
   def show
-    @cat = "Hello"
+    @user = "Hello"
     render :show
   end
 end
 
 router = Router.new
 router.draw do
-  get Regexp.new("^/cats$"), CatsController, :index
-  post Regexp.new("^/cats$"), CatsController, :create
-  get Regexp.new("^/cats/new$"), CatsController, :new
-  get Regexp.new("^/cats/(?<cat_id>\\d+)"), CatsController, :show
+  get Regexp.new("^/users$"), UsersController, :index
+  post Regexp.new("^/users$"), UsersController, :create
+  get Regexp.new("^/users/new$"), UsersController, :new
+  get Regexp.new("^/users/(?<user_id>\\d+)"), UsersController, :show
 end
 
 server = WEBrick::HTTPServer.new(Port: 3000)
