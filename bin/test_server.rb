@@ -1,24 +1,25 @@
 require_relative '../lib/controller_base'
 require_relative '../lib/router'
+require_relative '../lib/sqlobject'
 
-class User
-  attr_reader :name, :email
+class User < SQLObject
+  attr_reader :id, :name, :email
 
-  def self.all
-    @user ||= []
-  end
+  # def self.all
+  #   @user ||= []
+  # end
 
   def initialize(params = {})
     params ||= {}
     @name, @email = params["name"], params["email"]
   end
 
-  def save
-    return false unless @name.present? && @email.present?
-
-    User.all << self
-    true
-  end
+  # def save
+  #   return false unless @name.present? && @email.present?
+  #
+  #   User.all << self
+  #   true
+  # end
 
   def inspect
     { name: name, email: email }.inspect

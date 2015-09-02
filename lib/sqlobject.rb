@@ -3,6 +3,7 @@ require_relative 'options'
 require 'active_support/inflector'
 
 class SQLObject
+  attr_accessor :id
   # Get names of the database columns
   def self.columns
     info = DBConnection.execute2("SELECT * FROM #{table_name}")
