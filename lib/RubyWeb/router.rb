@@ -17,9 +17,24 @@ class Router
 
   #Defines methods for get, post, put and delete requests
   [:get, :post, :put, :delete].each do |http_method|
-    define_method(http_method) do |pattern, controller_class, action_name|
+    define_method(http_method) do |path, controller_class, action_name|
+      pattern = make_pattern(path)
       add_route(pattern, http_method, controller_class, action_name)
     end
+  end
+
+  #Makes a Regex for a url pattern
+  def make_pattern(string)
+    string = string[1..-1] if string[0] == "/"
+    regex_array = []
+    string.split("/").each do |fragment|
+      if fragment[0] == ":"
+      else
+        regex_array << fragment
+      end
+    end
+    puts "^/#{regex_array.join("/")}$"
+    Regexp.new("^/#{regex_array.join("/")}$")
   end
 
   #Returns matching route or nil
