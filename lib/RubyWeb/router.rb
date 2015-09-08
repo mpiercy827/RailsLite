@@ -29,11 +29,13 @@ class Router
     regex_array = []
     string.split("/").each do |fragment|
       if fragment[0] == ":"
+        var = fragment[1..-1]
+        regex_array << "(?<#{var}>\\d+)"
       else
         regex_array << fragment
       end
     end
-    puts "^/#{regex_array.join("/")}$"
+
     Regexp.new("^/#{regex_array.join("/")}$")
   end
 

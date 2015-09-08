@@ -40,20 +40,18 @@ class UsersController < ControllerBase
   end
 
   def show
-    @user = "Hello"
+    p params
+    @user = User.find(params[:user_id].to_i)
     render :show
   end
 end
 
 router = Router.new
 router.draw do
-  # get Regexp.new("^/users$"), UsersController, :index
   get "users", UsersController, :index
-  # post Regexp.new("^/users$"), UsersController, :create
   post "users", UsersController, :create
-  # get Regexp.new("^/users/new$"), UsersController, :new
   get "users/new", UsersController, :new
-  # get Regexp.new("^/users/(?<user_id>\\d+)"), UsersController, :show
+  get "users/:user_id", UsersController, :show
 end
 
 server = WEBrick::HTTPServer.new(Port: 3000)
