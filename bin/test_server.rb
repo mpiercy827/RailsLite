@@ -40,7 +40,6 @@ class UsersController < ControllerBase
   end
 
   def show
-    p params
     @user = User.find(params[:user_id].to_i)
     render :show
   end
